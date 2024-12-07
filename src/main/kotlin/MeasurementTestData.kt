@@ -1,7 +1,3 @@
-package tests.kotlin
-
-import Measurement
-import MeasurementType
 import java.time.LocalDateTime
 
 class MeasurementTestData {
