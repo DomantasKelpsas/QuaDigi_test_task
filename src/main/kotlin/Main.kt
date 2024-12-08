@@ -1,6 +1,7 @@
 fun main() {
-    val a = MeasurementSampler.sampleMeasurementData(MeasurementTestData.defaultData)
-    a.forEach {
+    val sampledMeasurementList = MeasurementSampler.sampleMeasurementData(MeasurementTestData.defaultData)
+
+    sampledMeasurementList.forEach {
         println(it)
     }
 }
