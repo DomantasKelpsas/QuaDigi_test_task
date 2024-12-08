@@ -1,6 +1,3 @@
-package test
-
-import Measurement
 import java.time.LocalDateTime
 
 class MeasurementTestData {

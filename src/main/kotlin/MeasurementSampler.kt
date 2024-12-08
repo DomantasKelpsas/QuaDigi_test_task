@@ -1,4 +1,6 @@
 object MeasurementSampler {
+    const val INTERVAL_IN_MINUTES = 5L
+
     fun sampleMeasurementData(measurementDatalist: List<Measurement>): List<Measurement> {
         val sampledMeasurementList = mutableListOf<Measurement>()
 
@@ -12,7 +14,7 @@ object MeasurementSampler {
                 val initialMeasurementTime = measurementGroup
                     .first().measurementTime
                     .let { measurementTime ->
-                        measurementTime.withSecond(0).withNano(0).minusMinutes((measurementTime.minute % 5).toLong())
+                        measurementTime.withSecond(0).withNano(0).minusMinutes((measurementTime.minute % INTERVAL_IN_MINUTES).toLong())
                     }
                 val lastMeasurementTime = measurementGroup
                     .last().measurementTime
@@ -20,9 +22,9 @@ object MeasurementSampler {
 
                 while (measurementTimeOffset <= lastMeasurementTime) {
                     val measurementsInInterval = measurementGroup.filter { measurementOfType ->
-                        measurementOfType.measurementTime in measurementTimeOffset..measurementTimeOffset.plusMinutes(5)
+                        measurementOfType.measurementTime in measurementTimeOffset..measurementTimeOffset.plusMinutes(INTERVAL_IN_MINUTES)
                     }
-                    measurementTimeOffset = measurementTimeOffset.plusMinutes(5)
+                    measurementTimeOffset = measurementTimeOffset.plusMinutes(INTERVAL_IN_MINUTES)
 
                     sampledMeasurementList.add(
                         measurementsInInterval
